@@ -19,25 +19,25 @@ export const addToReadingList = createAction(
 
 export const failedAddToReadingList = createAction(
   '[Reading List API] Failed add to list',
-  props<{ book: Book }>()
+  props<{ error: string }>()
 );
 
 export const confirmedAddToReadingList = createAction(
   '[Reading List API] Confirmed add to list',
-  props<{ book: Book }>()
+  props<{ item: ReadingListItem }>()
 );
 
 export const removeFromReadingList = createAction(
-  '[Books Search Results] Remove from list',
+  '[Reading List API] Remove from list',
   props<{ item: ReadingListItem }>()
 );
 
 export const failedRemoveFromReadingList = createAction(
   '[Reading List API] Failed remove from list',
-  props<{ item: ReadingListItem }>()
+  props<{ error: string }>()
 );
 
 export const confirmedRemoveFromReadingList = createAction(
   '[Reading List API] Confirmed remove from list',
-  props<{ item: ReadingListItem }>()
+  props<{ bookId: string  }>()
 );

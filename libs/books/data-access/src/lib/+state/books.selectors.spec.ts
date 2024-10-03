@@ -12,7 +12,7 @@ describe('Books Selectors', () => {
         {
           ...initialState,
           error: 'Unknown error',
-          loaded: true
+          loaded: true,
         }
       )
     };
