@@ -7,7 +7,25 @@
       placeholder="Search for books to add to your reading list"
       formControlName="term"
     />
-    <button mat-icon-button matSuffix>
+    <button
+      *ngIf="searchTerm"
+      data-cy="clear-search"
+      mat-icon-button
+      matSuffix
+      title="Clear Search"
+      type="reset"
+      [attr.aria-label]="'Clear Search'"
+      (click)="clearSearch()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matSuffix
+      title="Search"
+      [attr.aria-label]="'Search'"
+      type="submit"
+    >
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
@@ -21,7 +39,7 @@
       </div>
       <div class="book--content">
         <div class="book--content--cover">
-          <img src="{{ b.coverUrl }}" />
+          <img src="{{ b.coverUrl }}" [alt]="b.title"/>
         </div>
         <div class="book--content--info">
           <div><strong>Author:</strong> {{ b.authors.join(',') }}</div>
