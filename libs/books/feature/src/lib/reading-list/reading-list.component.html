@@ -1,20 +1,45 @@
 <ng-container *ngIf="(readingList$ | async).length > 0; else empty">
-  <div class="reading-list-item" *ngFor="let b of readingList$ | async">
+  <div class="reading-list-item" *ngFor="let b of readingList$ | async; let i = index">
     <div>
       <img class="reading-list-item--cover" [src]="b.coverUrl" [alt]="b.title"/>
     </div>
     <div class="reading-list-item--details">
-      <strong class="reading-list-item--details--title">{{ b.title }}</strong>
+      <strong class="reading-list-item--details--title title-{{ i }}">{{ b.title }}</strong>
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
       </div>
+      <div *ngIf="b?.finished">
+        <span class="date-{{ i }}">
+          Read book on:
+          <strong>{{
+            b?.finishedDate | date: 'shortDate':'en-US'
+          }}</strong></span
+        >
+      </div>
+    </div>
+    <div *ngIf="b.finished"><mat-icon [title]="'Reading finished '+ b.title" class="reading-list-item--finished-status">done</mat-icon></div>
+    <div *ngIf="!b.finished">
+      <button
+        mat-icon-button
+        color="primary"
+        [title]="'Finished reading ' + (b?.title || '')"
+        [attr.aria-label]="'Finished reading ' + (b?.title || '')"
+        (click)="updateFinishedStatus(b)"
+        [attr.data-testing]="'finished-' + i"
+        class="finished-btn-{{ i }}"
+      >
+        <mat-icon class="reading-list-item--finished-status">book</mat-icon>
+      </button>
     </div>
     <div>
       <button
         mat-icon-button
         color="warn"
-        [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
+        [title]="'Remove ' + (b?.title || '') + ' from reading list'"
+        [attr.aria-label]="'Remove ' + (b?.title || '') + ' from reading list'"
         (click)="removeFromReadingList(b)"
+        [attr.data-testing]="'finished-' + i"
+        class="remove-btn-{{ i }}"
       >
         <mat-icon>remove_circle</mat-icon>
       </button>

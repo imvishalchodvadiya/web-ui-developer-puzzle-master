@@ -13,7 +13,7 @@ export class BooksService {
     }
 
     return this.http
-      .get(`https://www.googleapis.com/books/v1/volumes?q=${term}`)
+      .get(`https://www.googleapis.com/books/v1/volumes?q=${term}&key=AIzaSyBf7i-FAqx_dpdK1Gi0RRGhQrVULbvyOn4`)
       .pipe(
         map(resp => {
           return resp.data.items.map(item => {

@@ -1,8 +1,8 @@
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
 import { BooksFeatureModule } from './books-feature.module';
 
 describe('ShopFeatureModule', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [BooksFeatureModule]
     }).compileComponents();

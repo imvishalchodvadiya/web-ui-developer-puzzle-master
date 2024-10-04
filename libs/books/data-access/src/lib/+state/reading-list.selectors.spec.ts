@@ -45,7 +45,7 @@ describe('ReadingList Selectors', () => {
     it("getTotalUnread() should return the current 'loaded' status", () => {
       const result = ToReadSelectors.getTotalUnread(state);
 
-      expect(result).toBe(3);
+      expect(result.length).toBe(3);
     });
   });
 });
