@@ -1,8 +1,8 @@
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
 import { BooksDataAccessModule } from './books-data-access.module';
 
 describe('ShopDataAccessModule', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [BooksDataAccessModule]
     }).compileComponents();
