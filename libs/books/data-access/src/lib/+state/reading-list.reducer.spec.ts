@@ -1,12 +1,17 @@
+import { ReadingListItem } from '@tmo/shared/models';
 import * as ReadingListActions from './reading-list.actions';
 import {
   initialState,
   readingListAdapter,
   reducer,
-  State
+  State,
 } from './reading-list.reducer';
-import { createBook, createReadingListItem } from '@tmo/shared/testing';
-
+import {
+  createBook,
+  createReadingListItem,
+  updateReadingListItem,
+} from '@tmo/shared/testing';
+import { Update } from '@ngrx/entity';
 describe('Books Reducer', () => {
   describe('valid Books actions', () => {
     let state: State;
@@ -22,7 +27,7 @@ describe('Books Reducer', () => {
       const list = [
         createReadingListItem('A'),
         createReadingListItem('B'),
-        createReadingListItem('C')
+        createReadingListItem('C'),
       ];
       const action = ReadingListActions.loadReadingListSuccess({ list });
 
@@ -34,7 +39,7 @@ describe('Books Reducer', () => {
 
     it('failedAddToReadingList should undo book addition to the state', () => {
       const action = ReadingListActions.failedAddToReadingList({
-          error: 'error'
+        error: 'error',
       });
 
       const result: State = reducer(state, action);
@@ -50,6 +55,22 @@ describe('Books Reducer', () => {
       const result: State = reducer(state, action);
 
       expect(result.ids).toEqual(['A', 'B']);
+    });
+
+    it('confirmedFinishedStatusOfReadingBook should update finished status', () => {
+      const list = [createReadingListItem('A'), createReadingListItem('B')];
+      const action = ReadingListActions.loadReadingListSuccess({ list });
+
+      const item = updateReadingListItem('A');
+      const updatedItem: Update<ReadingListItem> = {
+        id: item.bookId,
+        changes: item,
+      };
+      const updateAction = ReadingListActions.confirmedFinishedStatusOfReadingBook(
+        { updatedItem }
+      );
+      const result: State = reducer(state, updateAction);
+      expect(result.entities['A'].finished).toBe(true);
     });
   });
 

@@ -21,3 +21,16 @@ export function createReadingListItem(bookId: string): ReadingListItem {
     publishedDate: new Date(2020, 0, 1).toISOString()
   };
 }
+
+export function updateReadingListItem(bookId: string): ReadingListItem {
+  return {
+    bookId,
+    title: `Book ${bookId}`,
+    description: '',
+    authors: [`Author ${bookId}`],
+    coverUrl: '',
+    publishedDate: new Date(2020, 0, 1).toISOString(),
+    finished: true,
+    finishedDate: new Date().toISOString(),
+  };
+}

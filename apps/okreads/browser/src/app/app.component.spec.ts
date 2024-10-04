@@ -1,11 +1,11 @@
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
 import { SharedTestingModule } from '@tmo/shared/testing';
 
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, SharedTestingModule],
       declarations: []
